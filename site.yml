@@ -1,0 +1,27 @@
+---
+- name: Run apt update on Jetson Nano
+  vars:
+    ansible_user: jetson
+    ansible_password: jetson
+    destination_directory: tb3_noetic_ws
+    ros_distribution: noetic
+
+  hosts: target
+  gather_facts: false
+  become: true
+
+  # tasks:
+    # - include_role:
+    #     name: clone
+    #   tags:
+    #     - git
+
+  roles:
+    - role: apt
+    - role: clone
+      tags: git
+    - role: lineinfile
+    - role: shell
+
+# ansible-playbook -i inventory/inventory.ini site.yaml
+# ansible-playbook site.yml

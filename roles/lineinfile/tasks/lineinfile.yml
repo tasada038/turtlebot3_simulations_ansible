@@ -1,0 +1,34 @@
+
+---
+- name: Append setup to .bashrc
+  lineinfile:
+    dest: .bashrc
+    state: present
+    line: "source /opt/ros/{{ ros_distribution }}/setup.bash"
+    insertafter: EOF
+
+- name: Append TURTLEBOT3_MODEL to .bashrc
+  lineinfile:
+    dest: .bashrc
+    state: present
+    line: "export TURTLEBOT3_MODEL=big_wheel_3rs"
+    insertafter: EOF
+
+- name: Append TURTLEBOT3_PLAT to .bashrc
+  lineinfile:
+    dest: .bashrc
+    state: present
+    line: "export TURTLEBOT3_PLAT=false"
+    insertafter: EOF
+
+- name: Append LDS_MODEL to .bashrc
+  lineinfile:
+    dest: .bashrc
+    state: present
+    line: "export LDS_MODEL=LDS-01"
+    insertafter: EOF
+
+# - name: Update .bashrc with setup.bash
+#   lineinfile:
+#     path: /home/{{ ansible_user }}/.bashrc
+#     line: "source /home/{{ ansible_user }}/{{ destination_directory }}/install/setup.bash"

@@ -1,0 +1,70 @@
+---
+# Install Turtlebot3 Packages
+- name: Create directory for tb3_noetic_ws
+  file:
+    path: "/home/{{ ansible_user }}/{{ destination_directory }}/src/"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  become: true
+
+- name: Create build directory
+  file:
+    path: "{{ destination_directory }}/build"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  become: true
+
+- name: Create build directory
+  file:
+    path: "{{ destination_directory }}/devel"
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+  become: true
+
+- name: Clone DynamixelSDK repository
+  git:
+    repo: "https://github.com/ROBOTIS-GIT/DynamixelSDK.git"
+    dest: "{{ destination_directory }}/src/DynamixelSDK"
+    version: noetic-devel
+
+- name: Clone turtlebot3_msgs repository
+  git:
+    repo: https://github.com/ROBOTIS-GIT/turtlebot3_msgs.git
+    dest: "{{ destination_directory }}/src/turtlebot3_msgs"
+    version: noetic-devel
+
+- name: Clone turtlebot3_jp_custom repository
+  git:
+    repo: https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_jp_custom.git
+    dest: "{{ destination_directory }}/src/turtlebot3_jp_custom"
+    version: noetic-jp-devel
+
+# Install Gazebo & Realsense Packages
+- name: Clone realsense-ros_jp_custom repository
+  git:
+    repo: https://github.com/ROBOTIS-JAPAN-GIT/realsense-ros_jp_custom
+    dest: "{{ destination_directory }}/src/realsense-ros_jp_custom"
+    # version: development
+
+- name: Clone realsense_gazebo_plugin repository
+  git:
+    repo: https://github.com/pal-robotics/realsense_gazebo_plugin
+    dest: "{{ destination_directory }}/src/realsense_gazebo_plugin"
+    # version: melodic-devel
+
+- name: Clone turtlebot3_simulations_jp_custom repository
+  git:
+    repo: https://github.com/ROBOTIS-JAPAN-GIT/turtlebot3_simulations_jp_custom
+    dest: "{{ destination_directory }}/src/turtlebot3_simulations_jp_custom"
+    version: noetic-jp-devel
+
+- name: Clone lightsfm repository
+  git:
+    repo: https://github.com/robotics-upo/lightsfm
+    dest: "{{ destination_directory }}/src/lightsfm"

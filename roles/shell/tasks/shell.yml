@@ -1,0 +1,26 @@
+
+---
+- name: Build lightsfm
+  shell: make
+  args:
+    chdir: "{{ destination_directory }}/src/lightsfm"
+  become: true
+
+- name: Install lightsfm
+  shell: sudo make install
+  args:
+    chdir: "{{ destination_directory }}/src/lightsfm"
+  become: true
+
+# - name: Build ROS workspaces
+#   shell: |
+#     source /opt/ros/{{ ros_distribution }}/setup.bash
+#     cd /home/{{ ansible_user }}/{{ destination_directory }}
+#     catkin_make
+#   args:
+#     executable: /bin/bash
+#   become: true
+#   ignore_errors: True
+
+# - name: Source tb3_noetic_ws setup.bash
+#   shell: source ~/{{ destination_directory }}/devel/setup.bash

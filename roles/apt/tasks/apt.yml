@@ -1,0 +1,30 @@
+---
+- name: apt update cache
+  apt:
+    update_cache: yes
+
+# - name: Remove ros-noetic-dynamixel-sdk package
+#   apt:
+#     name: ros-noetic-dynamixel-sdk
+#     state: absent # remove
+
+# - name: Remove ros-noetic-turtlebot3-msgs package
+#   apt:
+#     name: ros-noetic-turtlebot3-msgs
+#     state: absent 
+
+# - name: Remove ros-noetic-turtlebot3 package
+#   apt:
+#     name: ros-noetic-turtlebot3
+#     state: absent
+
+- name: apt install ros-noetic-gmapping package
+  apt:
+    name: ros-noetic-gmapping
+    state: present # install
+
+- name: apt install realsense2-camera package
+  become: true
+  apt:
+    name: ros-{{ ros_distribution }}-realsense2-camera
+    state: present
